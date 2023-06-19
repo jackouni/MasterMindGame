@@ -1,62 +1,23 @@
-class Board
-    @@color_rows = [ # Represents the rows w color holes
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4]
-    ] 
+require_relative 'board'
+require_relative 'computer'
+require_relative 'player'
 
-    @@peg_rows = [  # Represents the rows w peg holes 
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4]
-    ] 
-
-    @@winning_board = false     # Tells the program if board is in a winning state for the guesser
+# Computer sets a code
+code = ComputerSetter.set_code
+p code
 
 
-end  
 
-class Player
-    def name_choice(name)
-        # Behaviour: Allows a player to choose a name
-    end 
+# player is introduced to guess the code:
+puts "You have #{Board.rows_left?} attempts to guess the 4 digit code (between 1 and 6)"
+#
 
-    def forfeit
-        # Behaviour: Allows a player to forfeit
-    end 
-end 
+# Player enters 4 digits between 1 - 6
+PlayerSetter.make_guess
+    # Game checks if digits are valid: 
+    # Entry is only numbers
+    # Each digit is 1 - 6
+    # 'else' it will ask for the player's input again
+#
 
-class Guesser < Player
-    def guess 
-        # Behaviour: For making guesses
-    end 
-end 
-
-class Setter < Player
-    def set_code(num1, num2, num3, num4)
-        # Behaviour: Allows setter to set their code
-    end
-
-    def set_pegs(num1, num2, num3, num4)
-        # Behaviour: Allows setter to set peg places
-    end 
-end 
-
+# Game checks to see if player's input matches the computer's 4 digit code
