@@ -1,54 +1,50 @@
 class Board
-    @@color_rows = [ # Represents the rows w color holes
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4]
-    ] 
+    attr_reader :peg_rows, :color_rows
+    def initialize
+        @color_rows = [ # Represents the rows w color holes
+            [1,2,3,4],
+            [1,2,3,4],
+            [1,2,3,4],
+            [1,2,3,4],
+            [1,2,3,4],
+            [1,2,3,4],
+            [1,2,3,4],
+            [1,2,3,4],
+            [1,2,3,4],
+            [1,2,3,4],
+            [1,2,3,4],
+            [1,2,3,4]
+        ] 
 
-    @@peg_rows = [  # Represents the rows w peg holes 
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4],
-        [1,2,3,4]
-    ] 
-
-    def self.get_peg_rows
-        @@peg_rows
+        @peg_rows = [  # Represents the rows w peg holes 
+            [1,2,3,4],
+            [1,2,3,4],
+            [1,2,3,4],
+            [1,2,3,4],
+            [1,2,3,4],
+            [1,2,3,4],
+            [1,2,3,4],
+            [1,2,3,4],
+            [1,2,3,4],
+            [1,2,3,4],
+            [1,2,3,4],
+            [1,2,3,4]
+        ] 
     end 
 
-    def self.get_color_rows
-        @@color_rows
-    end 
-
-    def self.rows_left?
+    def rows_left?
         number_of_rows = 0
-        @@color_rows.each do |row| 
+        @color_rows.each do |row| 
             number_of_rows += 1
         end 
         number_of_rows.to_s
     end 
 
-    def self.remove_a_color_row
-        Board.get_color_rows.shift()
-        Board.get_peg_rows.shift()
+    def display_board
+        @color_rows.each do |row|
+            puts "#{row}"
+            puts ""
+        end 
     end 
 
 end  
-

@@ -1,10 +1,14 @@
-module ComputerSetter
+class ComputerSetter
 
     def self.set_code
         4.times.map { rand(1..6) }
-    end     
+    end   
+    
+    def self.place_pegs
+
+    end 
 
 end 
 
-module ComputerGuesser
+class ComputerGuesser
 end 

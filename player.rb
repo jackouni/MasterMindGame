@@ -2,6 +2,7 @@ class PlayerSetter
     def self.make_guess
         player_guesses = []
         i = 1
+
         def self.guess_iteration(i)
         if i == 1
             "first"
@@ -28,9 +29,11 @@ class PlayerSetter
                 end   
             end
         end 
-        p player_guesses
+
+        player_guesses
     end
 end 
 
 class PlayerGuesser
+
 end 
