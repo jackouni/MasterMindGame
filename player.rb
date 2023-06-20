@@ -5,13 +5,13 @@ class PlayerSetter
 
         def self.guess_iteration(i)
         if i == 1
-            "first"
+            "FIRST"
         elsif i == 2
-            "second"
+            "SECOND"
         elsif i == 3
-            "third"
+            "THIRD"
         elsif i == 4
-            "last"
+            "LAST"
         end 
         end 
 

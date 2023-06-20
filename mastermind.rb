@@ -16,14 +16,16 @@ board.color_rows.each_index do |current_row| # Each round == each row on board
 
     # Game checks to see if player's input matches the computer's 4 digit code
     positions_correct, numbers_correct = GameLogic.match?(players_guess, code)
+
     if positions_correct == 4
         puts "You broke the code! You won the game and beat the computer!"
-    else 
-        puts "Numbers in correct position/order: #{positions_correct}"
-        puts "Numbers in the code, but not in the correct position/order: #{numbers_correct}"
+        break
     end 
+
     board.color_rows[current_row] = players_guess
     board.peg_rows[current_row][0] = "Exact = #{positions_correct}"
     board.peg_rows[current_row][1] = "Present = #{numbers_correct}"
+
+    GameLogic.display_board(board.color_rows, board.peg_rows, current_row)
 
 end 
