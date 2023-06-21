@@ -1,33 +1,45 @@
 require 'pry-byebug'
 module GameLogic
 
-
     def self.match?(player_guess, code)
-        comparison = []
-        code.each {|num| comparison.push(num)}
+        code_copy = [] # To avoid mutating the original code array
+        code.map {|number| code_copy.push(number)}
+    
+        exact_matches = 0
+        not_exact_matches = []
+        present_matches = 0
 
-        guess = []
-        player_guess.each {|num| guess.push(num)}
+        info = -> {
+            puts""
+            puts "code_copy:"
+            p code_copy
+            puts ""
+            puts "exact_matches:"
+            p exact_matches
+            puts ""
+            puts "not_exact_matches:"
+            p not_exact_matches
+          }
 
-        positions_correct = 0
-        numbers_correct = 0
-
-        guess.each do |number|
-            if comparison.include?(number)
-                number_index = guess.index(number) 
-
-                if number == comparison[number_index]
-                    positions_correct += 1
-                    comparison[number_index] = 'X-act'
-                    guess[number_index] = 'X-act'
-                elsif 
-                    numbers_correct += 1
-                    comparison[comparison.index(number)] = 'present'
-                    guess[number_index] = 'present'
-                end 
+          puts "EXACT MATCHES:"
+        player_guess.each_with_index do |number, number_index|                    
+            if number == code[number_index]
+                exact_matches += 1
+                code_copy[number_index] = "Exact"
+            else not_exact_matches.push(number)
             end 
+            info.call
         end  
-        return positions_correct, numbers_correct
+        puts "NOT EXACT:"
+        not_exact_matches.each do |number|
+            if code_copy.include?(number)
+                present_matches += 1
+                present_number_index = code_copy.index(number)
+                code_copy[present_number_index] = "Present"
+            end 
+            info.call
+        end 
+        return exact_matches, present_matches
     end 
 
 
@@ -45,7 +57,7 @@ module GameLogic
 
             elsif color_row == ["X", "X", "X", "X"]
                 puts "|   [0  0  0  0]      |        0000 | 0000          |"
-                
+
             else puts "|   #{color_row}      |   #{peg_row.join(" | ")}   |"
             end 
 
