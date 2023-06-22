@@ -23,7 +23,7 @@ code = setter.set_code
 
 board.color_rows.each_index do |current_row| # Each round == each row on the board
 
-    puts "\n#{12 - current_row} attempts remaining to guess the 4 digit code"
+    puts "\n#{guesser.name}, you have #{12 - current_row} attempts remaining to guess the 4 digit code"
     puts ""
 
     guess = guesser.make_guess
@@ -31,14 +31,15 @@ board.color_rows.each_index do |current_row| # Each round == each row on the boa
     positions_correct, numbers_correct = GameLogic.match?(guess, code) 
 
     if positions_correct == 4 && player_selects == "1"
-        puts "You broke the code! You won the game and beat the computer!"
-        puts "Code => #{code.flatten}"
+        puts "#{guesser.name} broke the code! You won the game and beat the computer!"
+        puts "  Code => #{code.flatten}"
+        puts ""
         player_wins = true
         break
     end
     if positions_correct == 4 && player_selects == "2"
-        puts "You lost, the computer guessed your code!"
-        puts "The computers code was #{code.flatten}"
+        puts "#{setter.name} lost, the computer guessed your code!"
+        puts "The computer's code was => #{code.flatten}"
         break
     end
 
@@ -53,4 +54,5 @@ end
 unless player_wins
     puts "You lost to the computer!"
     puts "Code => #{code.flatten}"
+    puts ""
 end 

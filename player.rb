@@ -2,13 +2,11 @@ module PlayerSelect
     def self.select_side
         puts "\nChoose whether you want to be the code breaker, or the code setter?"
         puts "  Enter '1' to be code breaker | Enter '2' to be code setter"
-        puts ""
         input = gets.chomp
 
         until input == "1" || input == "2"
             puts "\nERROR: Please enter either a '1' or a '2'!"
             puts "  Enter '1' to be code breaker | Enter '2' to be code setter"
-            puts ""
             input = gets.chomp
         end 
         return input
@@ -16,14 +14,12 @@ module PlayerSelect
 
     def self.select_rows
         puts "\nHow many rows do you want there to be on the board?"
-        puts "  You can go as low as 1 and as high as 10:"
-        puts ""
+        puts "  You can go as low as 1 and as high as 12:"
         input = gets.chomp.to_i
 
-        until input < 11 && input > 0
-            puts "\nERROR: Please enter a number between 1 and 10!"
+        until input < 13 && input > 0
+            puts "\nERROR: Please enter a number between 1 and 12!"
             puts "  How many rows do you want there to be on the board?:"
-            puts ""
             input = gets.chomp.to_i
         end 
         return input
@@ -31,7 +27,15 @@ module PlayerSelect
 end 
 
 class PlayerGuesser
+    attr_reader :name 
 
+    def initialize
+        puts "What is the username you'd like?:"
+        name = gets.chomp
+        @name = name
+
+        puts "Great! I will refer to you as #{name}"
+    end 
     def self.guess_iteration(i)
         if i == 1
             "FIRST"
@@ -50,7 +54,6 @@ class PlayerGuesser
 
         until player_guesses.length == 4 
             puts "\nEnter your #{PlayerGuesser.guess_iteration(i)} number for the code"
-            puts ""
 
             loop do
                 player_guess = gets.chomp.to_i 
@@ -60,7 +63,6 @@ class PlayerGuesser
                     break
                 else puts "\nERROR: PLEASE ENTER A NUMBER BETWEEN 1 & 6!!"
                      puts "  Try again:"
-                     puts ""
                 end   
             end
         end 
@@ -70,9 +72,18 @@ class PlayerGuesser
 end 
 
 class PlayerSetter
+    attr_reader :name 
+    
+    def initialize
+        puts "What is the username you'd like?:"
+        name = gets.chomp
+        @name = name
+
+        puts "Great! I will refer to you as #{name}"
+    end 
+
     def set_code
         code_set = []
         puts "\nCreate a 4 digit code. Each digit being between 1 and 6:"
-        puts ""
     end 
 end 
