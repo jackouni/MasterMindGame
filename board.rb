@@ -1,35 +1,8 @@
 class Board
     attr_reader :peg_rows, :color_rows
-    def initialize
-        @color_rows = [ # Represents the rows w color holes
-            ['X','X','X','X'],
-            ['X','X','X','X'],
-            ['X','X','X','X'],
-            ['X','X','X','X'],
-            ['X','X','X','X'],
-            ['X','X','X','X'],
-            ['X','X','X','X'],
-            ['X','X','X','X'],
-            ['X','X','X','X'],
-            ['X','X','X','X'],
-            ['X','X','X','X'],
-            ['X','X','X','X'],
-        ] 
-
-        @peg_rows = [  # Represents the rows w peg holes 
-            ['X','X'],
-            ['X','X'],
-            ['X','X'],
-            ['X','X'],
-            ['X','X'],
-            ['X','X'],
-            ['X','X'],
-            ['X','X'],
-            ['X','X'],
-            ['X','X'],
-            ['X','X'],
-            ['X','X']
-        ] 
+    def initialize(rows)
+        @color_rows = Array.new(rows) { ["X"] * 4 } 
+        @peg_rows = Array.new(rows) { ["X"] * 2 }
     end 
 
     def rows_left?

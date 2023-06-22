@@ -1,7 +1,7 @@
 require 'pry-byebug'
 module GameLogic
 
-    def self.match?(player_guess, code)
+    def self.match?(guess, code)
         code_copy = [] # To avoid mutating the original code array
         code.map {|number| code_copy.push(number)}
     
@@ -9,7 +9,7 @@ module GameLogic
         not_exact_matches = []
         present_matches = 0
 
-        player_guess.each_with_index do |number, number_index|                    
+        guess.each_with_index do |number, number_index|                    
             if number == code[number_index]
                 exact_matches += 1
                 code_copy[number_index] = "Exact"

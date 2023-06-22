@@ -1,30 +1,56 @@
 require_relative 'board'
 require_relative 'computer'
 require_relative 'player'
-require_relative 'game'
+require_relative 'game-logic'
+require_relative 'gameplay'
 
-board = Board.new()
-code = ComputerSetter.set_code
-code = [3,3,2,3]
+guesser = nil
+setter = nil
 
-board.color_rows.each_index do |current_row| # Each round == each row on board
+player_selects = PlayerSelect.select_side
+player_wins = false
+board = Board.new(PlayerSelect.select_rows)
 
-    puts "You have #{12 - current_row} attempts to guess the 4 digit code (between 1 and 6)"
+if player_selects == "1" 
+    guesser = PlayerGuesser.new()
+    setter = ComputerSetter.new()
+elsif player_selects == "2" 
+    guesser = ComputerGuesser.new()
+    setter =  PlayerSetter.new()
+end 
 
-    players_guess = PlayerSetter.make_guess
+code = setter.set_code 
 
-    ## FIX: GameLogic.match? | Giving incorrect exact/present matches
-    positions_correct, numbers_correct = GameLogic.match?(players_guess, code) 
+board.color_rows.each_index do |current_row| # Each round == each row on the board
 
-    if positions_correct == 4
+    puts "\n#{12 - current_row} attempts remaining to guess the 4 digit code"
+    puts ""
+
+    guess = guesser.make_guess
+
+    positions_correct, numbers_correct = GameLogic.match?(guess, code) 
+
+    if positions_correct == 4 && player_selects == "1"
         puts "You broke the code! You won the game and beat the computer!"
+        puts "Code => #{code.flatten}"
+        player_wins = true
         break
-    end 
+    end
+    if positions_correct == 4 && player_selects == "2"
+        puts "You lost, the computer guessed your code!"
+        puts "The computers code was #{code.flatten}"
+        break
+    end
 
-    board.color_rows[current_row] = players_guess
-    board.peg_rows[current_row][0] = "Exact = #{positions_correct}"
-    board.peg_rows[current_row][1] = "Present = #{numbers_correct}"
+    board.color_rows[current_row] = guess                 
+    board.peg_rows[current_row][0] = "Exact = #{positions_correct}" 
+    board.peg_rows[current_row][1] = "Present = #{numbers_correct}" 
 
     GameLogic.display_board(board.color_rows, board.peg_rows, current_row)
 
+end 
+
+unless player_wins
+    puts "You lost to the computer!"
+    puts "Code => #{code.flatten}"
 end 
