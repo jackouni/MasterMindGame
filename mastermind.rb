@@ -18,4 +18,5 @@ if player_selects == "1"
 elsif player_selects == "2" 
     guesser = ComputerGuesser.new()
     setter =  PlayerSetter.new()
+    SetterSide.gameplay(board, guesser, setter, player_wins)
 end 

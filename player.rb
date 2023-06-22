@@ -73,17 +73,46 @@ end
 
 class PlayerSetter
     attr_reader :name 
-    
+
     def initialize
-        puts "What is the username you'd like?:"
+        puts "\nWhat is the username you'd like?:"
         name = gets.chomp
         @name = name
 
         puts "Great! I will refer to you as #{name}"
     end 
 
+    def self.set_iteration(i)
+        if i == 1
+            "FIRST"
+        elsif i == 2
+            "SECOND"
+        elsif i == 3
+            "THIRD"
+        elsif i == 4
+            "LAST"
+        end 
+    end 
+
     def set_code
-        code_set = []
+        code = []
+        i = 1
+
         puts "\nCreate a 4 digit code. Each digit being between 1 and 6:"
+        until code.length == 4  
+            puts "Enter your #{PlayerSetter.set_iteration(i)} digit for the 4 digit code:"
+            loop do
+                player_set = gets.chomp.to_i 
+                if player_set > 0 && player_set < 7
+                    code.push(player_set)
+                    i += 1
+                    break
+                else puts "\nERROR: PLEASE ENTER A NUMBER BETWEEN 1 & 6!!"
+                     puts "  Try again:"
+                end   
+            end 
+        end
+
+        return code
     end 
 end 
