@@ -24,7 +24,7 @@ module GameLogic
                 code_copy[present_number_index] = "Present"
             end 
         end 
-        return exact_matches, present_matches
+        return exact_matches, present_matches, not_exact_matches
     end 
 
 

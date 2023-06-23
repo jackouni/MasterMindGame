@@ -14,9 +14,9 @@ board = Board.new(PlayerSelect.select_rows)
 if player_selects == "1" 
     guesser = PlayerGuesser.new()
     setter = ComputerSetter.new()
-    GuesserSide.gameplay(board, guesser, setter, player_wins)
+    GuesserSide.gameplay(board, guesser, setter, player_wins, player_selects)
 elsif player_selects == "2" 
     guesser = ComputerGuesser.new()
     setter =  PlayerSetter.new()
-    SetterSide.gameplay(board, guesser, setter, player_wins)
+    SetterSide.gameplay(board, guesser, setter, player_wins, player_selects)
 end 
