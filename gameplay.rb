@@ -35,6 +35,7 @@ module GuesserSide
             puts ""
         end 
     end 
+    
 end 
 
 module SetterSide
@@ -92,4 +93,5 @@ module SetterSide
             puts ""
         end 
     end 
+
 end 

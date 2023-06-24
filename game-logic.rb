@@ -52,5 +52,4 @@ module GameLogic
         puts ""
     end
 
-
 end

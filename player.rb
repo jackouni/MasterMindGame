@@ -24,6 +24,7 @@ module PlayerSelect
         end 
         return input
     end
+    
 end 
 
 
@@ -71,6 +72,7 @@ class PlayerGuesser
 
         player_guesses
     end
+
 end 
 
 

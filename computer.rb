@@ -1,4 +1,3 @@
-require 'pry-byebug'
 class ComputerSetter
     attr_reader :name
     
@@ -9,6 +8,7 @@ class ComputerSetter
     def set_code
         4.times.map { rand(1..6) }
     end
+
 end 
 
 class ComputerGuesser
@@ -21,7 +21,7 @@ class ComputerGuesser
     end 
 
     def make_guess 
-        #binding.pry
+
         guess = [0,0,0,0]
 
         while @guesses.include?(guess)
@@ -31,4 +31,5 @@ class ComputerGuesser
         @guesses.push(guess)
         guess
     end 
+
 end 
