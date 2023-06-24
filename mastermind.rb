@@ -6,7 +6,7 @@ require_relative 'gameplay'
 
 guesser = nil
 setter = nil
-player_wins = false
+player_wins = nil
 
 player_selects = PlayerSelect.select_side
 board = Board.new(PlayerSelect.select_rows)
