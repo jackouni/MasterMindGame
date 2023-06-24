@@ -11,18 +11,21 @@ class ComputerSetter
 end 
 
 class ComputerGuesser
-    attr_reader :name
+    attr_reader :name, :guesses
+
 
     def initialize
         @name = "Mr.Computer"
+        @guesses = []
     end 
 
-    def make_guess(current_row, board)
-        code = []
+    def make_guess
+        guess = []
+        while @guesses.include?(guess)
+            guess = Array.new(4) { rand(1..6) }
+            @guesses.push(guess)
+        end 
 
-        if current_row == 1
-            code = [1,1,2,2]
-            return code
-        end
+        guess
     end 
 end 
