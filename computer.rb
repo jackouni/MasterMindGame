@@ -1,3 +1,4 @@
+require 'pry-byebug'
 class ComputerSetter
     attr_reader :name
     
@@ -16,16 +17,18 @@ class ComputerGuesser
 
     def initialize
         @name = "Mr.Computer"
-        @guesses = []
+        @guesses = [[0,0,0,0]]
     end 
 
-    def make_guess
-        guess = []
+    def make_guess 
+        #binding.pry
+        guess = [0,0,0,0]
+
         while @guesses.include?(guess)
             guess = Array.new(4) { rand(1..6) }
-            @guesses.push(guess)
         end 
 
+        @guesses.push(guess)
         guess
     end 
 end 
