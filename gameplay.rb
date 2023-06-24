@@ -1,6 +1,6 @@
 module GuesserSide
 
-    def self.gameplay(board, guesser, setter, player_wins, player_selects)
+    def self.gameplay(board, guesser, setter, player_wins)
 
         code = setter.set_code 
 
@@ -12,16 +12,11 @@ module GuesserSide
         
             positions_correct, numbers_correct = GameLogic.match?(guess, code) 
         
-            if positions_correct == 4 && player_selects == "1"
+            if positions_correct == 4
                 puts "#{guesser.name} broke the code! You won the game and beat the computer!"
                 puts "  Code => #{code.flatten}"
                 puts ""
                 player_wins = true
-                break
-            end
-            if positions_correct == 4 && player_selects == "2"
-                puts "#{setter.name} lost, the computer guessed your code!"
-                puts "The computer's code was => #{code.flatten}"
                 break
             end
         
@@ -34,8 +29,9 @@ module GuesserSide
         end 
 
         unless player_wins
-            puts "You lost to the computer!"
-            puts "Code => #{code.flatten}"
+            sleep(2)
+            puts "  You lost to the computer!"
+            puts "      The computer's code was => #{code.flatten}"
             puts ""
         end 
     end 
@@ -44,29 +40,32 @@ end
 
 module SetterSide
 
-    def self.gameplay(board, guesser, setter, player_wins, player_selects)
+    def self.gameplay(board, guesser, setter, player_wins)
 
         code = setter.set_code 
 
         board.color_rows.each_index do |current_row| # Each round == each row on the board      
-            puts "\n#{guesser.name}, you have #{board.color_rows.length - current_row} attempts remaining to guess the 4 digit code"
+            puts "\n#{guesser.name}, has #{board.color_rows.length - current_row} attempts remaining to guess your 4 digit code."
+            sleep(2)
+            puts "It's guessing! ..."
+            sleep(2)
+            puts "..."
             puts ""
         
-            guess = guesser.make_guess(current_row, board)
+            guess = guesser.make_guess
+            sleep(2)
             puts "Mr.Computer: 'My guess for row #{current_row} is #{guess}.'"
+            sleep(1)
+
         
             exact_matches, present_matches, no_matches = GameLogic.match?(guess, code) 
         
-            if exact_matches == 4 && player_selects == "1"
-                puts "#{guesser.name} broke the code! You won the game and beat the computer!"
-                puts "  Code => #{code.flatten}"
+            if exact_matches == 4 
+                puts "Mr.Computer guessed your code => #{code.flatten}"
+                sleep(1)
+                puts "  YOU LOSE!"
                 puts ""
-                player_wins = true
-                break
-            end
-            if exact_matches == 4 && player_selects == "2"
-                puts "#{setter.name} lost, the computer guessed your code!"
-                puts "The computer's code was => #{code.flatten}"
+                player_wins = false
                 break
             end
         
@@ -78,11 +77,11 @@ module SetterSide
         
         end 
 
-        unless player_wins
-            puts "You lost to the computer!"
-            puts "Code => #{code.flatten}"
+        if player_wins
+            sleep(2)
+            puts "You beat the computer with your code! =>  #{code.flatten}"
+            puts "CONGRATS WINNER!"
             puts ""
         end 
     end 
-
 end 
